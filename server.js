@@ -59,17 +59,7 @@ app.get('/collections/lesson', async function (req, res, next) {
   }
 });
 
-app.get('/collections1/:collectionName', async function(req, res, next) {
- 
-});
 
-app.get('/collections/:collectionName/:max/:sortAspect/:sortAscDesc', async function(req, res, next){
-    
-});
-
-app.get('/collections/:collectionName/:id' , async function(req, res, next) {
-    
-});
 
 app.post('/collections/:collectionName', async function(req, res, next) {
     
