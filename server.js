@@ -82,9 +82,40 @@ app.delete('/collections/:collectionName/:id', async function(req, res, next) {
     
 });
 
-app.put('/collections/:collectionName/:id', async function(req, res, next) {
+app.put('/courses/:courseId', async function(req, res) {
+  const { courseId } = req.params; // Get the courseId from the URL parameters
+  const { quantity } = req.body; // Get the quantity to subtract (this could be 1 if only 1 item is being purchased)
 
+  try {
+    // Find the course by courseId and update the remaining availability
+    const course = await db1.collection('lesson').findOne({ _id: new ObjectId(courseId) });
+
+    if (!course) {
+      return res.status(404).json({ error: 'Course not found' });
+    }
+
+    // Check if there's enough availability
+    if (course.remaining < quantity) {
+      return res.status(400).json({ error: 'Not enough available spots' });
+    }
+
+    // Update the course's remaining spots
+    const updatedCourse = await db1.collection('lesson').updateOne(
+      { _id: new ObjectId(courseId) },
+      { $inc: { remaining: -quantity } } // Decrease the remaining by the quantity purchased
+    );
+
+    if (updatedCourse.modifiedCount > 0) {
+      return res.status(200).json({ message: 'Course availability updated successfully' });
+    } else {
+      return res.status(500).json({ error: 'Failed to update course availability' });
+    }
+  } catch (err) {
+    console.error('Error updating course availability:', err);
+    res.status(500).json({ error: 'An error occurred while updating course availability' });
+  }
 });
+
 
 app.use((err, req, res, next) => {
     console.error('Global error handler:', err);
