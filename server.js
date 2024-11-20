@@ -78,10 +78,6 @@ app.post('/orders', async function (req, res) {
 });
 
 
-app.delete('/collections/:collectionName/:id', async function(req, res, next) {
-    
-});
-
 app.put('/courses/:courseId', async function(req, res) {
   const { courseId } = req.params; // Get the courseId from the URL parameters
   const { quantity } = req.body; // Get the quantity to subtract (this could be 1 if only 1 item is being purchased)
