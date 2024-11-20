@@ -60,10 +60,23 @@ app.get('/collections/lesson', async function (req, res, next) {
 });
 
 
+// POST endpoint to handle the form submission and save order details to MongoDB
+app.post('/orders', async function (req, res) {
+  try {
+    const orderData = req.body; // Get the data sent from the client
+    const collection = db1.collection('orders'); // Reference the 'orders' collection
 
-app.post('/collections/:collectionName', async function(req, res, next) {
+    // Insert the order data into the 'orders' collection
+    const result = await collection.insertOne(orderData);
     
+    // Send a success response back to the client
+    res.status(201).json({ message: 'Order placed successfully', orderId: result.insertedId });
+  } catch (err) {
+    console.error('Error saving order:', err);
+    res.status(500).json({ error: 'An error occurred while saving the order' });
+  }
 });
+
 
 app.delete('/collections/:collectionName/:id', async function(req, res, next) {
     
