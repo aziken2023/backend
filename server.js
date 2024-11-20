@@ -1,3 +1,5 @@
+// This code sets up an Express app, enables CORS, configures JSON parsing, 
+// and reads database connection properties from a config file using PropertiesReader.
 var express = require("express");
 let app = express();
 const cors = require("cors");
@@ -6,7 +8,8 @@ app.use(express.json());
 app.set('json spaces', 3);
 const path = require('path');
 let PropertiesReader = require("properties-reader");
-// Load properties from the file
+
+// This loads properties from the file  
 let propertiesPath = path.resolve(__dirname, "./dbconnection.properties");
 let properties = PropertiesReader(propertiesPath);
 
