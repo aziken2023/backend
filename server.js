@@ -63,7 +63,7 @@ app.get('/collections/lesson', async function (req, res, next) {
 });
 
 
-// POST endpoint to handle the form submission and save order details to MongoDB
+// POST for the endpoint to handle the form submission and save order details to MongoDB
 app.post('/orders', async function (req, res) {
   try {
     const orderData = req.body; // Get the data sent from the client
