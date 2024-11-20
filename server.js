@@ -13,7 +13,7 @@ let PropertiesReader = require("properties-reader");
 let propertiesPath = path.resolve(__dirname, "./dbconnection.properties");
 let properties = PropertiesReader(propertiesPath);
 
-// Extract values from the properties file
+// This Extract values from the properties file
 const dbPrefix = properties.get('db.prefix');
 const dbHost = properties.get('db.host');
 const dbName = properties.get('db.name');
