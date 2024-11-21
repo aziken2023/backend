@@ -3,7 +3,15 @@
 var express = require("express");
 let app = express();
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+  origin: "(https://backend-1hjb.onrender.com)",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type"
+}));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log('Server is running on port ${PORT}');
+});
 app.use(express.json());
 app.set('json spaces', 3);
 const path = require('path');
