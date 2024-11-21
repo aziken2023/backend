@@ -4,7 +4,7 @@ var express = require("express");
 let app = express();
 const cors = require("cors");
 app.use(cors({
-  origin: "https://backend-1hjb.onrender.com",
+  origin: "https://aziken2023.github.io", 
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type"
 }));
